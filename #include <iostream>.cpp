@@ -83,3 +83,44 @@ public:
 
     
 };
+
+    void remove_random() {
+        if (!head) {
+            return;
+        }
+        int count = 0;
+        Node* current = head;
+        while (current) {
+            current = current->next;
+            count++;
+        }
+        int removeIndex = rand() % count;
+        Node* temp = head;
+        for (int i = 0; i < removeIndex; i++) {
+            temp = temp->next;
+        }
+        if (temp == head) {
+            pop_front();
+        } else if (temp == tail) {
+            remove_last();
+        } else {
+            temp->prev->next = temp->next;
+            temp->next->prev = temp->prev;
+            cout << temp->data << " left the line" << endl;
+            delete temp;
+        }
+    }
+
+    void print() {
+        Node* current = head;
+        if (!current) {
+            cout << "List is empty." << endl;
+            return;
+        }
+        while (current) {
+            cout << current->data << " ";
+            current = current->next;
+        }
+        cout << endl;
+    }
+;
