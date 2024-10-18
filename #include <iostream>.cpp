@@ -124,3 +124,38 @@ public:
         cout << endl;
     }
 ;
+
+int main() {
+    srand(time(NULL));  // Initialize random seed
+    DoublyLinkedList coffeeShopLine;
+
+    // Simulate 20 time periods
+    for (int minute = 1; minute <= 20; minute++) {
+        cout << "Time step #" << minute << ":" << endl;
+
+        // Initial setup: Add 5 customers
+        if (minute == 1) {
+            coffeeShopLine.push_back("Jean");
+            coffeeShopLine.push_back("Iris");
+            coffeeShopLine.push_back("Omar");
+            coffeeShopLine.push_back("Andy");
+            coffeeShopLine.push_back("Drew");
+        } else {
+            if (rand() % 100 < 40 && coffeeShopLine.pop_front()) {
+                // 40% chance a customer is served
+            }
+            if (rand() % 100 < 60) {
+                coffeeShopLine.push_back("New Customer");  // 60% chance a new customer joins
+            }
+            if (rand() % 100 < 20) {
+                coffeeShopLine.remove_last();  // 20% chance the last customer leaves
+            }
+            if (rand() % 100 < 10) {
+                coffeeShopLine.push_front("VIP Customer");  // 10% chance a VIP cuts in line
+            }
+            coffeeShopLine.remove_random();  // 10% chance any customer leaves
+        }
+        coffeeShopLine.print();  // Display the current line
+    }
+    return 0;
+}
